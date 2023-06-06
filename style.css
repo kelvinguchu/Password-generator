@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+body {
+  background-color: rgb(15, 17, 16);
+  font-family: 'Poppins', sans-serif;
+}
+
+#main {
+  background: rgba(24, 19, 19, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  margin: 0 auto;
+  width: 50%;
+  min-height: 50vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px; 
+  color: white;
+}
+
+button {
+  background-color: rgba(157, 83, 226, 0.616);
+  box-shadow: 0 5px 20px 0 rgba(249, 250, 255, 0.2);
+  font-size: 20px;
+  padding: 10px 20px; /* Adjusted padding for the button */
+  margin-top: 20px; /* Reduced margin-top */
+  margin-bottom: 20px; /* Reduced margin-bottom */
+  color: white;
+  border-radius: 10px;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+}
+
+h1 {
+  margin-bottom: 30px; /* Reduced margin-bottom */
+  margin-top: 0; /* Removed margin-top */
+}
+
+p {
+  margin: 10px 0; /* Removed default margin for the <p> element */
+}
+
+#passwordLength {
+    width: 50px;
+    height: 30px;
+    font-size: 20px;
+    border-radius: 10px;
+    border: none;
+    text-align: center;
+    
+}
