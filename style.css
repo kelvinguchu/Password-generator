@@ -3,15 +3,13 @@
 body {
   background-color: rgb(15, 17, 16);
   font-family: 'Poppins', sans-serif;
+  margin: 0;
+  overflow-x: hidden;
 }
 
 #main {
-  background: rgba(24, 19, 19, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(157, 83, 226, 0.616);
+  border-radius: 20px;
   margin: 0 auto;
   width: 50%;
   min-height: 50vh;
@@ -24,39 +22,63 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 50px; 
-  color: white;
+  padding: 50px;
+  color: rgba(255, 255, 255, 0.8); /* Slightly transparent white for better contrast */
 }
 
 button {
   background-color: rgba(157, 83, 226, 0.616);
-  box-shadow: 0 5px 20px 0 rgba(249, 250, 255, 0.2);
   font-size: 20px;
-  padding: 10px 20px; /* Adjusted padding for the button */
-  margin-top: 20px; /* Reduced margin-top */
-  margin-bottom: 20px; /* Reduced margin-bottom */
+  padding: 10px 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   color: white;
   border-radius: 10px;
   border: none;
-  font-family: 'Poppins', sans-serif;
   cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition for hover and active states */
+}
+
+button:hover {
+  background-color: rgba(177, 103, 246, 0.8);  /* Slightly brighter on hover */
+}
+
+button:active {
+  background-color: rgba(137, 63, 206, 0.8);  /* Slightly darker on press */
 }
 
 h1 {
-  margin-bottom: 30px; /* Reduced margin-bottom */
-  margin-top: 0; /* Removed margin-top */
+  margin-bottom: 30px;
+  margin-top: 0;
 }
 
 p {
-  margin: 10px 0; /* Removed default margin for the <p> element */
+  margin: 10px 0;
+}
+
+#error {
+  color: red;
+  font-weight: bold;
 }
 
 #passwordLength {
-    width: 50px;
-    height: 30px;
-    font-size: 20px;
-    border-radius: 10px;
-    border: none;
-    text-align: center;
-    
+  width: 200px;
+  height: 30px;
+  font-size: 20px;
+  border-radius: 10px;
+  border: none;
+  text-align: center;
+  padding: 5px; /* Adding some padding to make it more visually appealing */
+}
+
+#passwordLength::placeholder {
+  color: rgba(255, 255, 255, 0.5);  /* Lighter placeholder text */
+}
+
+@media screen and (max-width: 600px) {
+  #main {
+    width: 70%;
+  }
+
+  
 }
