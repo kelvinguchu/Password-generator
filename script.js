@@ -1,58 +1,60 @@
-//Declare arrays to store the values that will make up the password. 
-const upperCase = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-const lowerCase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+'use strict';
+
+const upperCase = Array.from({length: 26}, (_, i) => String.fromCharCode(i + 65));
+const lowerCase = Array.from({length: 26}, (_, i) => String.fromCharCode(i + 97));
+const numbers = Array.from({length: 10}, (_, i) => i.toString());
 const symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+'];
+const allCharacters = [upperCase, lowerCase, numbers, symbols];
+
+function getRandomValue(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+};
 
 function generatePassword() {
-  let password = '';
-  let passwordLength = parseInt(document.getElementById('passwordLength').value);
+  const passwordLength = parseInt(document.getElementById('passwordLength').value) || 8;
 
-  // Check if password length is valid
-  if (passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength)) {
+  if (passwordLength < 8 || passwordLength > 128) {
     document.getElementById('error').textContent = 'Password must be between 8 and 128 characters';
+    return '';
   } else {
     document.getElementById('error').textContent = '';
-
-    // Generate password
-    for (let i = 0; i < passwordLength; i++) {
-      let randomCharacter = '';
-
-      // Generate a random number between 0 and 3 to determine the character type
-      let characterType = Math.floor(Math.random() * 4);
-
-      // Select a random character from the corresponding character type array
-      switch (characterType) {
-        case 0:
-          randomCharacter = upperCase[Math.floor(Math.random() * upperCase.length)];
-          break;
-        case 1:
-          randomCharacter = lowerCase[Math.floor(Math.random() * lowerCase.length)];
-          break;
-        case 2:
-          randomCharacter = numbers[Math.floor(Math.random() * numbers.length)];
-          break;
-        case 3:
-          randomCharacter = symbols[Math.floor(Math.random() * symbols.length)];
-          break;
-      }
-
-      password += randomCharacter;
-    }
     
-    // Return the generated password
-    return password;
-  }
-}
+    let password = [];
+    allCharacters.forEach(characterSet => {
+      password.push(getRandomValue(characterSet));
+    });
+    for (let i = password.length; i < passwordLength; i++) {
+      const randomCharacterSet = getRandomValue(allCharacters);
+      password.push(getRandomValue(randomCharacterSet));
+    }
+    return password.sort(() => Math.random() - 0.5).join('');
+  };
+};
+
+document.getElementById('copyButton').addEventListener('click', () => {
+  navigator.clipboard.writeText(document.getElementById('output').textContent);
+
+  // Change the button's icon to a tick/check mark
+  const iconElement = document.querySelector('#copyButton i');
+  iconElement.className = "fas fa-check";
+
+  // Set a timeout to revert the icon back to its original state after 3 seconds
+  setTimeout(() => {
+      iconElement.className = "fas fa-copy";
+  }, 2000);
+});
+
 
 function writePassword() {
-  // Generate a password using the generatePassword() function
-  let password = generatePassword();
+  const passwordLength = parseInt(document.getElementById('passwordLength').value);
 
-  // Write the generated password to the 'output' element in the HTML
-  document.getElementById('output').innerHTML = password;
-}
+  if (!isNaN(passwordLength) && passwordLength > 0) {
+    document.getElementById('output').textContent = generatePassword();
+  } else {
+    document.getElementById('output').textContent = '';
+  };
+};
 
-// Call the writePassword() function to generate and display the password
-writePassword();
 
+// Set a default password length when the page loads
+document.getElementById('passwordLength').value = 8;
